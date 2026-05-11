@@ -1,5 +1,6 @@
-import { Crown, Sparkles } from "lucide-react";
+import { Crown } from "lucide-react";
 
+import { CreditsAvailableBadge } from "../_components/credits-balance";
 import { Card } from "../_components/dashboard-shell";
 
 export default function CustomerPortalPage() {
@@ -26,10 +27,7 @@ export default function CustomerPortalPage() {
             The dashboard menu is wired. Connect your payment provider here when
             billing is ready.
           </p>
-          <div className="inline-flex items-center gap-2 rounded-md border border-orange-400/50 bg-gradient-to-r from-orange-400/10 to-pink-500/10 px-4 py-2 text-sm font-medium text-orange-500">
-            <Sparkles className="size-4" />
-            10 credits available
-          </div>
+          <CreditsAvailableBadge />
         </div>
       </Card>
     </div>

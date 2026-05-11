@@ -29,6 +29,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
 } from "~/components/ui/breadcrumb";
+import { SidebarCreditsAmount } from "./credits-balance";
 
 type NavItem = {
   href: string;
@@ -144,9 +145,7 @@ function SidebarContent({
               </div>
               {!collapsed ? (
                 <div className="flex flex-col">
-                  <span className="text-foreground text-sm font-bold transition-colors duration-200 group-hover:text-yellow-600">
-                    10
-                  </span>
+                  <SidebarCreditsAmount />
                   <span className="text-muted-foreground text-xs leading-tight">
                     Credits
                   </span>
