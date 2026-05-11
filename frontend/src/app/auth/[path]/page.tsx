@@ -2,7 +2,12 @@ import { notFound } from "next/navigation";
 
 import { AuthForm, type AuthPath } from "./auth-form";
 
-const authPaths = ["sign-in", "sign-up"] satisfies AuthPath[];
+const authPaths = [
+  "forgot-password",
+  "sign-in",
+  "sign-out",
+  "sign-up",
+] satisfies AuthPath[];
 
 export default async function AuthPage({
   params,

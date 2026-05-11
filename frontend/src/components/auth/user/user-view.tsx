@@ -1,0 +1,58 @@
+"use client";
+
+import {
+  type UsernameAuthClient,
+  useAuth,
+  useSession,
+} from "@better-auth-ui/react";
+import type { User } from "better-auth";
+
+import { Skeleton } from "~/components/ui/skeleton";
+import { cn } from "~/lib/utils";
+import { UserAvatar } from "./user-avatar";
+
+export type UserViewProps = {
+  className?: string;
+  isPending?: boolean;
+  user?: User & { displayUsername?: string | null; username?: string | null };
+};
+
+export function UserView({ className, isPending, user }: UserViewProps) {
+  const { authClient } = useAuth();
+  const { data: session, isPending: sessionPending } = useSession(
+    authClient as UsernameAuthClient,
+    { enabled: !user && !isPending },
+  );
+
+  const resolvedUser = user ?? session?.user;
+
+  if ((isPending || sessionPending) && !user) {
+    return (
+      <div className={cn("flex items-center gap-2", className)}>
+        <UserAvatar isPending />
+        <div className="grid flex-1 gap-1 text-left text-sm">
+          <Skeleton className="h-4 w-24" />
+          <Skeleton className="h-3 w-32" />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={cn("flex items-center gap-2", className)}>
+      <UserAvatar user={resolvedUser} />
+      <div className="grid flex-1 text-left text-sm leading-tight">
+        <span className="text-foreground truncate font-medium">
+          {resolvedUser?.displayUsername ??
+            resolvedUser?.name ??
+            resolvedUser?.email}
+        </span>
+        {(resolvedUser?.displayUsername ?? resolvedUser?.name) ? (
+          <span className="text-muted-foreground truncate text-xs">
+            {resolvedUser?.email}
+          </span>
+        ) : null}
+      </div>
+    </div>
+  );
+}

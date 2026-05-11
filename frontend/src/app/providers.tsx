@@ -23,7 +23,7 @@ export function Providers({ children }: { children: ReactNode }) {
         replace ? router.replace(to) : router.push(to)
       }
       queryClient={queryClient}
-      redirectTo="/"
+      redirectTo="/dashboard"
     >
       {children}
     </AuthProvider>
